@@ -40,6 +40,16 @@ const result = await client
 response.send(result)
 
 } )
+app.delete("/students/:id", async function(request,response){
+const {id} =request.params;
+const result = await client
+.db("mentor_student")
+.collection("student")
+.deleteOne({_id:new ObjectId(id)})
+
+response.send(result)
+
+} )
 app.get("/mentors", async function(request,response){
 
 const result = await client
@@ -47,6 +57,16 @@ const result = await client
 .collection("mentor")
 .find({})
 .toArray()
+
+response.send(result)
+
+} )
+app.delete("/mentors/:id", async function(request,response){
+    const {id} =request.params;
+const result = await client
+.db("mentor_student")
+.collection("mentor")
+.deleteOne({_id:new ObjectId(id)})
 
 response.send(result)
 
